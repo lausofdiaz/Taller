@@ -19,8 +19,6 @@ const valorTotal = computed(()=>{
 
 const porcentaje = computed(()=>{
   let descuento = 0
-
-  
   if(props.articulos?.length>=12){
     descuento = 0.2;
   }else if(props.articulos?.length>=6){
@@ -32,7 +30,6 @@ const porcentaje = computed(()=>{
   } else if(valorTotal.value >= 60000){
     descuento = 0.05;
   }
-
   let totalConDescuento = valorTotal.value*descuento
   return totalConDescuento
 })
