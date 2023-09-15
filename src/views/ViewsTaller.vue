@@ -3,8 +3,8 @@
 import {ref} from 'vue';
 import ComponenstTaller from '../components/ComponentsTaller.vue';
 const articulo = ref('');
-const cantidad= ref(0);
-const valor= ref(0);
+const cantidad= ref(1);
+const valor= ref(1);
 const articulos = ref([]);
 
 function agregar(){
@@ -17,8 +17,8 @@ function agregar(){
   articulos.value.push(nuevoArticulo);
 
   articulo.value = '';
-  cantidad.value = 0;
-  valor.value = 0;
+  cantidad.value = 1;
+  valor.value = 1;
 }
 
 function borrar(index){
@@ -39,11 +39,11 @@ function borrar(index){
             <div class="campo">
                 <label >Cantidad de Artículos:</label>
                 <input type="number"
-               v-model="cantidad" placeholder="Cantidad">
+               v-model="cantidad" placeholder="Cantidad" >
             </div>
             <div class="campo">
                 <label >Valor del Artículo:</label>
-                <input  v-model="valor"  type="number" placeholder="Valor">
+                <input  v-model="valor"  type="number" placeholder="Valor" >
             </div>
             <button @click="agregar()" type="button" class="boton-agregar">Agregar</button>
             </div>
