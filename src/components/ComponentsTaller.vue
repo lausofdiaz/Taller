@@ -46,8 +46,7 @@ mayor = descuentoCantidad
 mayor = descuentoPorcentaje
 }
 
-let totalConDescuento = valorTotal.value*mayor
-  return totalConDescuento
+return mayor
 
 })
 
@@ -84,7 +83,7 @@ return totaltotal
         </tbody>
       </table>
       <h3>Valor total: ${{ valorTotal }} </h3>
-      <h3>Descuento: {{ porcentaje }}% </h3>
+      <h3>Descuento ({{ porcentaje*100 }}%) : $ {{ porcentaje*valorTotal }} </h3>
       <h3>Total a pagar: ${{ totalApagar }} </h3>
 </template>
 <style scoped>
