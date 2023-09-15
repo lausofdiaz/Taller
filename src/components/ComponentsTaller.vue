@@ -17,21 +17,38 @@ const valorTotal = computed(()=>{
   return suma
 })
 
-const porcentaje = computed(()=>{
-  let descuento = 0
-  if(props.articulos?.length>=12){
-    descuento = 0.2;
-  }else if(props.articulos?.length>=6){
-    descuento = 0.1;
-  }else if(valorTotal.value >=240000){
-    descuento = 0.15;
+const porcentaje = computed (()=>{
+let descuentoCantidad = 0
+let descuentoPorcentaje = 0
+let mayor = 0
+
+if (props.articulos?.length>=12){
+descuentoCantidad=0.2;
+} else if (props.articulos?.length>=6){
+descuentoCantidad=0.1;
+}else {
+  descuentoCantidad=0;
+}
+
+if(valorTotal.value >=240000){
+    descuentoPorcentaje = 0.15;
   } else if (valorTotal.value >=120000){
-    descuento = 0.1;
+    descuentoPorcentaje = 0.1;
   } else if(valorTotal.value >= 60000){
-    descuento = 0.05;
+    descuentoPorcentaje = 0.05;
+  }else{
+    descuentoPorcentaje=0;
   }
-  let totalConDescuento = valorTotal.value*descuento
+
+if (descuentoCantidad>descuentoPorcentaje){
+mayor = descuentoCantidad
+} else {
+mayor = descuentoPorcentaje
+}
+
+let totalConDescuento = valorTotal.value*mayor
   return totalConDescuento
+
 })
 
 
