@@ -1,49 +1,106 @@
-<script lang="ts">
+
+<script setup lang="ts">
 import {ref} from 'vue';
-import ComponentsTaller from '../components/ComponentsTaller.vue'
-export default{
-    name:'ViewsTaller', data(){
-        return{
-            articulo: '',
-            cantidad: 0,
-            valor: 0
-        }
-    }, 
-    components:
-    {ComponentsTaller },
-    methods:{
-        
-        
-    }
+import ComponenstTaller from '../components/ComponentsTaller.vue';
+const articulo = ref('');
+const cantidad= ref(0);
+const valor= ref(0);
+const articulos = ref([]);
+
+function agregar(){
+    const nuevoArticulo = {
+    articulo: articulo.value,
+    cantidad: cantidad.value,
+    valor: valor.value
+  };
+
+  articulos.value.push(nuevoArticulo);
+
+  articulo.value = '';
+  cantidad.value = 0;
+  valor.value = 0;
+}
+
+function borrar(index){
+    articulos.value.splice(index,1);
 }
 </script>
-<template>
- <section class="form-container">
-    <h2>Articulo</h2>
-    <input type="text" v-model="articulo">
-    <h2>Cantidad</h2>
-    <input type="number" v-model="cantidad">
-    <h2>Valor Unitario</h2>
-    <input type="text" v-model="valor">
-    <button>Agregar</button>
-    <ComponentsTaller :articulo="articulo" :cantidad="cantidad" :valor="valor "/>
-</section>
-</template>
+
+
+<template>   
+
+        <form class="formulario">
+            <div>
+                <h2 class="titulo">Datos del Artículo</h2>
+            <div class="campo">
+                <label for="nombre">Nombre del Artículo:</label>
+                <input type="text" v-model="articulo" placeholder="Nombre del artículo">
+            </div>
+            <div class="campo">
+                <label >Cantidad de Artículos:</label>
+                <input type="number"
+               v-model="cantidad" placeholder="Cantidad">
+            </div>
+            <div class="campo">
+                <label >Valor del Artículo:</label>
+                <input  v-model="valor"  type="number" placeholder="Valor">
+            </div>
+            <button @click="agregar()" type="button" class="boton-agregar">Agregar</button>
+            </div>
+        </form>
+        <section class="componente">
+            <ComponenstTaller :articulos="articulos" @borrar="borrar"></ComponenstTaller>
+        </section>
+     
+
+  </template>
 
 <style scoped>
-.form-container {
-            width: 300px;
-            text-align: left;
+     
+ 
+.componente{
+  grid-area: componente;
+}
+        .formulario {
+            grid-area: formulario;
+            border: 1px solid #ccc;
+            padding: 20px;
+            max-width: 400px;
+            display: flex;
+            justify-content: center;
+            height: 300px;
         }
-        .form-container h2 {
-            margin-bottom: 5px;
-        }
-        .form-container input {
-            width: 100%;
+
+        .titulo {
+            font-size: 20px;
             margin-bottom: 10px;
         }
 
-        .form-container button {
-            display: block;
+        .campo {
+            margin-bottom: 15px;
         }
+
+        .campo label {
+            display: block;
+            font-weight: bold;
+        }
+
+        .campo input {
+            width: 250px;
+            padding: 5px;
+
+        }
+
+        .boton-agregar {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        .boton-agregar:hover {
+            background-color: #0056b3;
+        }
+
 </style>
